@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://fhgwfgtpt5d"]
+
+[ext_resource type="Script" uid="uid://buys2j5wfmqjs" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://dqcdy6pv4eolx" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://bvq5xrh2e7d2i" path="res://ground.png" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://bafhuvdv2hcr6" path="res://night_sky.png" id="4_lquwl"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_e1os3"]
+
+[node name="Main" type="Node2D" unique_id=73372968]
+script = ExtResource("1_0xm2m")
+
+[node name="Player" parent="." unique_id=910343372 instance=ExtResource("1_ig7tw")]
+position = Vector2(300, 370)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1087051472]
+limit_bottom = 696
+position_smoothing_enabled = true
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=1732011076]
+wait_time = 2.0
+autostart = true
+
+[node name="Ground" type="StaticBody2D" parent="." unique_id=220605395]
+position = Vector2(0, 600)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=1229813332]
+shape = SubResource("WorldBoundaryShape2D_e1os3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground" unique_id=66313847]
+texture_repeat = 2
+position = Vector2(0, 48)
+scale = Vector2(3, 3)
+texture = ExtResource("4_1bvp3")
+region_enabled = true
+region_rect = Rect2(0, 0, 4000, 32)
+
+[node name="Sky" type="CanvasLayer" parent="." unique_id=632671712]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="Sky" unique_id=1932222571]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_lquwl")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1580451577]
+
+[node name="ScoreLabel" type="Label" parent="HUD" unique_id=2031289294]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 60.0
+offset_bottom = 43.0
+theme_override_font_sizes/font_size = 32
